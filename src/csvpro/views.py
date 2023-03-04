@@ -171,7 +171,7 @@ class DeleteSchemaView(generic.DeleteView):
             return self.get_object()
 
 
-class CSVResponseMixin(object):
+class CSVResponseMixin:
     def render_to_response(self, context, **response_kwargs):
         req = self.request.GET.copy()
         if req.get("csv", "") == "true" and req.get("file_id"):
@@ -190,7 +190,6 @@ class CSVResponseMixin(object):
                 query = schema.data_column.all().order_by("order")
                 file_headers = query.values_list("column_name", flat=True)
                 range_values = query.values("from_value", "to_value", "column_type")
-
                 writer = csv.writer(
                     csvfile,
                     delimiter=schema.column_separator,
