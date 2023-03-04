@@ -40,7 +40,7 @@ class SchemaForm(forms.ModelForm):
             ("/", "Slash (/)"),
         )
         CHAR_CHOICES = (
-            ('""', 'Double quote (")'),
+            ('', 'Double quote (")'),
             ("'", "Single quote (')"),
         )
         self.fields["name"] = forms.CharField(label="Name")
