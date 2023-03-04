@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="container">
+<div class="col-lg-3 col-md-2">
     <h4>Sample schema</h4>
     <a href="{% url "update_schema" pk=1 %}"><button class="btn-primary btn"> Edit schema</button></a>
     <br> <br>
@@ -25,8 +26,9 @@
       </tbody>
     </table>
 </div>
+</div>
 <br><br>
-<div>
+<div class="container">
     <h4>Data sets</h4>
     <div class="text-right">
         <input id="rows_number" required='required' type="number" />
