@@ -12,8 +12,22 @@
     <tr>
       <td id="schema_id" class="schema_id">{{ schema.id }}</td>
       <td>{{ schema.created | date:"Y-m-d" }}</td>
-      <td id="schema_status" class="schema_status">{{ schema.status }}</td>
-      <td><a href="{% url 'generate_csv' %}?csv=true&file_id={{ schema.id }}">Download</a></td>
+      <td id="schema_status" class="schema_status">
+          {% if schema.status == 'Ready' %}
+              <button class="button readonly statusbut" style="background: greenyellow;">
+                {{ schema.status }}
+              </button>
+          {% else %}
+              <button class="button readonly statusbut">
+                {{ schema.status }}
+              </button>
+          {% endif %}
+      </td>
+      <td>
+          {% if schema.status != 'Not Generated' %}
+            <a href="{% url 'generate_csv' %}?csv=true&file_id={{ schema.id }}">Download</a>
+          {% endif %}
+      </td>
     </tr>
   {% endfor %}
   </tbody>

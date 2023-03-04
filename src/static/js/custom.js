@@ -3,6 +3,24 @@ let initialNode = document.querySelectorAll('#schema-row');
 
 $(function(){
 
+    $(window).on('load', function(event){
+        let copyNode = document.querySelectorAll('#schema-row');
+        let index = copyNode.length;
+        for (let i = 0; i < index; i++) {
+            let to_value = $(`#id_form-${i}-to_value`);
+            let from_value = $(`#id_form-${i}-from_value`);
+            if (to_value.val() || from_value.val()) {
+                let to_values = document.querySelector(`#id_form-${i}-to_value`);
+                let from_values = document.querySelector(`#id_form-${i}-from_value`);
+                to_values.removeAttribute('disabled');
+                from_values.removeAttribute('disabled');
+                to_values.setAttribute('required', 'required');
+                from_values.setAttribute('required', 'required');
+            }
+        }
+        event.preventDefault();
+    });
+
     $(document).on('change',"select[id$='column_type']", function(){
         let e = $(this);
         let selected_value = e.val()
@@ -15,11 +33,15 @@ $(function(){
         if (selected_value == 'Integer'){
             to_value.removeAttribute('disabled');
             from_value.removeAttribute('disabled');
+            to_value.setAttribute('required', 'required');
+            from_value.setAttribute('required', 'required');
             to_value.removeAttribute('placeholder');
             from_value.removeAttribute('placeholder');
         }else if (selected_value == 'Text'){
             to_value.removeAttribute('disabled');
             from_value.removeAttribute('disabled');
+            to_value.setAttribute('required', 'required');
+            from_value.setAttribute('required', 'required');
             to_value.setAttribute('placeholder', 'Sentences');
             from_value.setAttribute('placeholder', 'Sentences');
         }else{
@@ -54,10 +76,10 @@ $(function(){
             newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${index}-`);
             table.append(newForm);
         }
-
         totalForms.setAttribute('value', `${index + 1}`)
         let formsNumber = index + 1;
-        let schem = copyNode;
+        let newNode = document.querySelectorAll('#schema-row');
+        let schem = newNode;
         for (let i = 0; i < formsNumber; i++) {
             let indexes = $(schem[i]).find(':input');
             let prefix = `form`
@@ -78,7 +100,7 @@ function removeSchema(holder) {
 
     let index = copyNode.length - 1;
     let totalForms = document.querySelector(`#id_form-TOTAL_FORMS`);
-    totalForms.setAttribute('value', `${index}`);
+    totalForms.setAttribute('value', `${index + 1}`);
 
     let formsNumber = copyNode.length + 1;
     let schem = copyNode;

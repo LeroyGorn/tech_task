@@ -186,10 +186,10 @@ class CSVResponseMixin(object):
                     return response
         elif req.get("csv", "") == "false" and req.get("file_id"):
             schema = get_object_or_404(DataSchema, pk=req.get("file_id"))
-            filepath = os.path.join(settings.MEDIA_ROOT, "files", f"report{schema.id}.csv")
+            filepath = os.path.join(settings.MEDIA_ROOT, "files", f"report{schema.id}_{schema.updated}.csv")
             with open(filepath, "w") as csvfile:
                 query = schema.data_column.all().order_by("order")
-                file_headers = query.values_list("column_type", flat=True)
+                file_headers = query.values_list("column_name", flat=True)
                 range_values = query.values("from_value", "to_value", "column_type")
 
                 writer = csv.writer(csvfile)
@@ -221,6 +221,6 @@ class CSVGenerateView(CSVResponseMixin, generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(CSVGenerateView, self).get_context_data(**kwargs)
-        context["schema_columns"] = DataColumn.objects.filter(columns__id=9)
+        context["schema_columns"] = DataColumn.objects.filter(columns__id=1)
         context["schemas"] = DataSchema.objects.filter(owner=self.request.user).order_by("updated")
         return context
