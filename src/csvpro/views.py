@@ -192,7 +192,12 @@ class CSVResponseMixin(object):
                 file_headers = query.values_list("column_name", flat=True)
                 range_values = query.values("from_value", "to_value", "column_type")
 
-                writer = csv.writer(csvfile)
+                writer = csv.writer(
+                    csvfile,
+                    delimiter=schema.column_separator,
+                    quotechar=schema.string_character,
+                    quoting=csv.QUOTE_NONNUMERIC,
+                )
                 writer.writerow(file_headers)
                 for n in range(1, int(req.get("rows"))):
                     writer.writerow(generate_csv(range_values=range_values))
