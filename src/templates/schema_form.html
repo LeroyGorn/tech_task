@@ -1,0 +1,79 @@
+<form method="post">
+    {% csrf_token %}
+
+      <div class="form-group">
+        {{ schema_form.name.label }}
+        <div class="relative">
+                {{ schema_form.name.errors }}
+                {{ schema_form.name }}
+        </div>
+      </div>
+    <br>
+      <div class="form-group">
+        {{ schema_form.column_separator.label }}
+        <div class="relative">
+            {{ schema_form.column_separator.errors }}
+            {{ schema_form.column_separator }}
+        </div>
+      </div>
+    <br>
+      <div class="form-group">
+        {{ schema_form.string_character.label }}
+        <div class="relative">
+            {{ schema_form.string_character.errors }}
+            {{ schema_form.string_character }}
+        </div>
+      </div>
+    <br>
+    {{ formset.management_form }}
+    {{ formset.non_form_errors }}
+    <table id="form_table" class="table table-stripped">
+        <thead>
+        <tr>
+            <th>Column name</th>
+            <th>Type</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Order</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="form_schemas">
+            {% for form in formset %}
+                <tr class="schema-row" id="schema-row">
+                    <td class="column">
+                        {{ form.column_name.errors }}
+                        {{ form.column_name }}
+                    </td>
+                    <td class="column">
+                        {{ form.column_type.errors }}
+                        {{ form.column_type }}
+                    </td>
+                    <td class="column">
+                        {{ form.from_value.errors }}
+                        {{ form.from_value }}
+                    </td>
+                    <td class="column">
+                        {{ form.to_value.errors }}
+                        {{ form.to_value }}
+                    </td>
+                    <td class="column">
+                        {{ form.order.errors }}
+                        {{ form.order }}
+                    </td>
+                    <td class="column">
+                        <a class="btn-remove" style="display: block; color: red;" onclick="removeSchema(this)">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+        <a href="javascript:void(0)" class="btn btn-primary btn-add">
+            Add column
+        </a>
+
+        <input type="submit" class="btn btn-primary" value="Submit">
+</form>

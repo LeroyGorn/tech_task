@@ -1,0 +1,20 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Created</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="generator_body">
+  {% for schema in schemas %}
+    <tr>
+      <td id="schema_id" class="schema_id">{{ schema.id }}</td>
+      <td>{{ schema.created | date:"Y-m-d" }}</td>
+      <td id="schema_status" class="schema_status">{{ schema.status }}</td>
+      <td><a href="{% url 'generate_csv' %}?csv=true&file_id={{ schema.id }}">Download</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>

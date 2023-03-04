@@ -1,0 +1,14 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% block content %}
+<h3>{% if schema_form.name.value %}Update schema{% else %}New schema{% endif %}</h3>
+    <div class="schemas_form">
+        {% include 'schema_form.html' with schema_form=schema_form formset=formset %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ block.super }}
+    <script src="{% static "js/custom.js" %}"></script>
+{% endblock %}

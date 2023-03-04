@@ -1,0 +1,15 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% block content %}
+    <h4>Delete Schema</h4>
+        <div class="schemas_form">
+        <h5>Do you want to delete schema "{{ schema.name }}" ?</h5>
+        </div>
+        <br>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" style="background: red; border: red;" value="Confirm deletion" name="confirm_delete"/>
+            <input type="submit" class="btn btn-primary" value="Cancel" name="cancel"/>
+        </form>
+{% endblock %}
