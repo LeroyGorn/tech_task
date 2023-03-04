@@ -2,13 +2,12 @@ import csv
 import os
 
 from django.conf import settings
-from django.core.files import File
+from django.contrib import messages
 from django.db import transaction
-from django.http import (Http404, HttpResponse, HttpResponseRedirect,
+from django.http import (HttpResponse, HttpResponseRedirect,
                          JsonResponse)
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect
 from django.template import loader
-from django.urls import reverse, reverse_lazy
 from django.views import generic
 
 from csvpro.csv_generator import generate_csv

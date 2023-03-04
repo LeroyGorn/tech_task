@@ -57,11 +57,16 @@ class SchemaColumnForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(SchemaColumnForm, self).__init__(*args, **kwargs)
+        self.fields['order'] = forms.DecimalField(
+            min_value=0, required=True
+        )
         self.fields["from_value"] = forms.DecimalField(
-            required=False, widget=forms.NumberInput(attrs={"disabled": True})
+            min_value=0, required=False, widget=forms.NumberInput(attrs={
+                "disabled": True,
+            })
         )
         self.fields["to_value"] = forms.DecimalField(
-            required=False, widget=forms.NumberInput(attrs={"disabled": True})
+            min_value=0, required=False, widget=forms.NumberInput(attrs={"disabled": True})
         )
 
 
