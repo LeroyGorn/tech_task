@@ -2,27 +2,29 @@
 {% load static %}
 
 {% block content %}
-<h4>Sample schema</h4>
-<a href="{% url "update_schema" pk=1 %}"><button class="btn-primary btn"> Edit schema</button></a>
-<br> <br>
-<table class="table table-striped table-bordered w-auto">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Column name</th>
-      <th>Column type</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for column in schema_columns %}
-    <tr>
-      <td>{{ column.order }}</td>
-      <td>{{ column.column_name }}</td>
-      <td>{{ column.column_type }}</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+    <div>
+        <h4>Sample schema</h4>
+        <a href="{% url "update_schema" pk=1 %}"><button class="btn-primary btn"> Edit schema</button></a>
+        <br> <br>
+        <table class="table table-striped table-bordered w-auto">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Column name</th>
+              <th>Column type</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for column in schema_columns %}
+            <tr>
+              <td>{{ column.order }}</td>
+              <td>{{ column.column_name }}</td>
+              <td>{{ column.column_type }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    </div>
 <br><br>
 <div class="container">
     <h4>Data sets</h4>
